@@ -22,38 +22,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Debugging step to print the current directory and its contents
-      - name: Debug Root Directory
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Files in current directory:"
-          ls -al
-
-      # Debugging step to list all directories and their files one level deep
-      - name: List One Level Deep
-        run: |
-          echo "List files one level deep:"
-          find . -maxdepth 1 -type d -exec ls -al {} \;
-
       # Install java
       - name: Set up JDK 21
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin' # or 'zulu', 'adopt', 'oraclejdk'
           java-version: '21'
-
-      # Debugging steps before checking file presence
-      - name: Debug resources Directory
-        run: |
-          echo "Files in resources directory:"
-          ls -al resources || echo "resources directory not found"
-
-      # Debugging step to ensure the selenium-with-actions directory exists
-      - name: Debug selenium-with-actions Directory
-        run: |
-          echo "Files in selenium-with-actions directory:"
-          ls -al selenium-with-actions || echo "Directory not found"
 
       # Add another detailed directory listing for more insights
       - name: List All Directories
@@ -64,14 +38,6 @@ jobs:
       # Run Maven tests
       - name: Run tests with maven
         run: mvn test
-
-      # Upload Surefire Reports for test results
-      - name: Upload Surefire Reports
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: surefire-reports
-          path: target/surefire-reports/
 
       # Collect build data
       - name: Collect build data

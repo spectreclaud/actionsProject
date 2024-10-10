@@ -34,13 +34,17 @@ jobs:
           echo "All directories:"
           find . -type d
 
-      # Run Maven tests
-      - name: Run tests with maven
-        run: mvn test
-
       # Ensure the script is executable
       - name: Make test_result_script.sh executable
         run: chmod +x ./resources/test_result_script.sh
+
+      # List the file permissions to ensure the script is executable
+      - name: List file permissions of test_result_script.sh
+        run: ls -l ./resources/test_result_script.sh
+
+      # Run Maven tests
+      - name: Run tests with maven
+        run: mvn test
 
       # Collect build data
       - name: Collect build data

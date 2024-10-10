@@ -38,6 +38,10 @@ jobs:
       - name: Run tests with maven
         run: mvn test
 
+      # Ensure the script is executable
+      - name: Make test_result_script.sh executable
+        run: chmod +x ./resources/test_result_script.sh
+
       # Collect build data
       - name: Collect build data
         if: always()

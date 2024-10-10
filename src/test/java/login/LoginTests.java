@@ -17,4 +17,14 @@ public class LoginTests extends BaseTests {
         Assert.assertTrue(secureAreaPage.getAlertText().contains("You logged into a secure area!"),
                 "Alert text is incorrect");
     }
+
+    @Test
+    public void testUnsuccessfulLogin() {
+        LoginPage loginPage = homePage.clickFormAuthentication();
+        loginPage.setUsername("tomsmith");
+        //loginPage.setPassword("SuperSecretPassword!");
+        SecureAreaPage secureAreaPage = loginPage.clickLoginButton();
+        Assert.assertTrue(secureAreaPage.getAlertText().contains("You logged into a secure area!"),
+                "Alert text is incorrect");
+    }
 }

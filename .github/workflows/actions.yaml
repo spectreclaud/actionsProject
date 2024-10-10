@@ -50,5 +50,5 @@ jobs:
       - name: Collect build data
         if: always()
         run: |
-          echo "TOTAL_DURATION=$(expr $(date +%s) - ${START_TIME})"
+          echo "GITHUB_ACTIONS_TOTAL_DURATION=$(expr $(date +%s) - ${START_TIME})" | curl --data-binary @- ${{ secrets.PUSHGATEWAY_URL }}/metrics/job/github_actions
           ./resources/test_result_script.sh

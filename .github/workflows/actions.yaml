@@ -50,5 +50,5 @@ jobs:
       - name: Collect build data
         if: always()
         run: |
-          echo "TOTAL_DURATION=$(expr $(date +%s) - ${START_TIME})" >> $GITHUB_ENV
-          ./resources/test_result_script.sh "$(pwd)/target/surefire-reports"
+          echo "TOTAL_DURATION=$(expr $(date +%s) - ${START_TIME})"
+          ./resources/test_result_script.sh

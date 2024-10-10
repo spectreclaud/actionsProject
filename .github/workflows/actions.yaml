@@ -15,7 +15,6 @@ jobs:
       HEADLESS_CHROME: true
 
     steps:
-      # Set a start time
       - name: Set start time
         run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
 

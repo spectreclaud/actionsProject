@@ -49,14 +49,6 @@ jobs:
           echo "Files in resources directory:"
           ls -al resources || echo "resources directory not found"
 
-      # Ensure the file exists
-      - name: Check file presence
-        run: |
-          if [ ! -f resources/puppy_and_kitten.jpg ]; then
-            echo "File resources/puppy_and_kitten.jpg not found!"
-            exit 1
-          fi
-
       # Debugging step to ensure the selenium-with-actions directory exists
       - name: Debug selenium-with-actions Directory
         run: |
@@ -71,7 +63,7 @@ jobs:
 
       # Run Maven tests
       - name: Run tests with maven
-        run: mvn clean verify -X
+        run: mvn clean test verify -X
 
       # Upload Surefire Reports for test results
       - name: Upload Surefire Reports

@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - "**" # This will run on all branches, and must be quoted to be handled by yaml
+  schedule:
+    - cron: '*/10 * * * *'
 
 # What jobs to execute
 jobs:
@@ -15,7 +17,6 @@ jobs:
       HEADLESS_CHROME: true
 
     steps:
-      # Set a start time
       - name: Set start time
         run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
 
@@ -35,11 +36,23 @@ jobs:
           echo "All directories:"
           find . -type d
 
+      # Ensure the script is executable
+      - name: Make test_result_script.sh executable
+        run: chmod +x ./resources/test_result_script.sh
+
+      # List the file permissions to ensure the script is executable
+      - name: List file permissions of test_result_script.sh
+        run: ls -l ./resources/test_result_script.sh
+
       # Run Maven tests
       - name: Run tests with maven
         run: mvn test
 
       # Collect build data
       - name: Collect build data
+        env:
+          PUSHGATEWAY_URL: ${{ secrets.PUSHGATEWAY_URL }}
         if: always()
-        run: expr $(date +%s) - ${START_TIME}
+        run: |
+          echo "github_actions_total_duration $(expr $(date +%s) - ${START_TIME})" | curl --data-binary @- ${PUSHGATEWAY_URL}/metrics/job/github_actions
+          ./resources/test_result_script.sh

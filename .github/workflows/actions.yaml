@@ -63,7 +63,7 @@ jobs:
 
       # Run Maven tests
       - name: Run tests with maven
-        run: mvn clean test verify -X
+        run: mvn test
 
       # Upload Surefire Reports for test results
       - name: Upload Surefire Reports

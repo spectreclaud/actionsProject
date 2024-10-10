@@ -30,6 +30,7 @@ jobs:
           distribution: 'temurin' # or 'zulu', 'adopt', 'oraclejdk'
           java-version: '21'
 
+
       # Add another detailed directory listing for more insights
       - name: List All Directories
         run: |

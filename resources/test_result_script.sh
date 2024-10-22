@@ -17,3 +17,5 @@ github_actions_passed_tests{commit="${GITHUB_SHA}", actor="${GITHUB_ACTOR}", bra
 github_actions_failed_tests{commit="${GITHUB_SHA}", actor="${GITHUB_ACTOR}", branch="${GITHUB_REF}"} $(echo ${TEST_RESULTS_STRING} | awk -F'"' '{ print $8 }')
 github_actions_skipped_tests{commit="${GITHUB_SHA}", actor="${GITHUB_ACTOR}", branch="${GITHUB_REF}"} $(echo ${TEST_RESULTS_STRING} | awk -F'"' '{ print $10 }')
 EOF
+
+
